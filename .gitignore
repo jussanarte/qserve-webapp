@@ -1,0 +1,72 @@
+# ==========================================
+# 1. PHP / Backend (Laravel ou PHP Puro)
+# ==========================================
+vendor/
+.env
+.env.backup
+.env.production
+composer.phar
+*.log
+
+# Específico para Laravel
+storage/*.key
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+storage/logs/*
+
+# ==========================================
+# 2. Angular / Frontend
+# ==========================================
+node_modules/
+dist/
+tmp/
+out-of-memory.log
+.angular/
+
+# Tailwind - Ficheiros de build e cache
+.tailwindcss/
+tailwind.config.js.map
+*.css.map
+
+# Se estiver a usar o Bootstrap via ficheiros compilados manualmente (menos comum em Angular)
+# assets/css/bootstrap.css.map
+# assets/js/bootstrap.bundle.min.js.map
+
+# Logs de erro de ferramentas de CSS (PostCSS, Sass)
+.sass-cache/
+*.log
+
+
+# Ficheiros de logs de erro do NPM
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================
+# 3. MySQL / XAMPP
+# ==========================================
+# Nunca versionar os dados reais da DB ou backups automáticos
+mysql/data/
+phpmyadmin/config.inc.php
+apache/logs/
+*.sql
+*.sqlite
+
+# ==========================================
+# 4. VS Code / IDE
+# ==========================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+.history/
+*.code-workspace
+
+# ==========================================
+# 5. Sistema Operativo / Diversos
+# ==========================================
+Thumbs.db
+.DS_Store
+desktop.ini
