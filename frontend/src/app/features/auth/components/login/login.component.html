@@ -1,0 +1,35 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="brand">
+      <span class="brand-name">QSERVE</span>
+      <span class="brand-sub">Refeitório Digital</span>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="o.seu@email.ao" />
+        <span class="err" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+          Email inválido
+        </span>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="••••••" />
+        <span class="err" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+          Mínimo 6 caracteres
+        </span>
+      </div>
+
+      <div class="alert" *ngIf="error">{{ error }}</div>
+
+      <!-- DEPOIS — sem spinner por enquanto -->
+      <button type="submit" [disabled]="form.invalid || loading" class="btn-primary">
+        {{ loading ? 'A entrar...' : 'Entrar' }}
+      </button>
+    </form>
+
+    <p class="link">Não tem conta? <a routerLink="/auth/register">Registar</a></p>
+  </div>
+</div>
