@@ -38,7 +38,6 @@ tailwind.config.js.map
 .sass-cache/
 *.log
 
-
 # Ficheiros de logs de erro do NPM
 npm-debug.log*
 yarn-debug.log*
@@ -53,6 +52,7 @@ phpmyadmin/config.inc.php
 apache/logs/
 *.sql
 *.sqlite
+*.sql.bak
 
 # ==========================================
 # 4. VS Code / IDE
@@ -63,6 +63,9 @@ apache/logs/
 !.vscode/launch.json
 .history/
 *.code-workspace
+.idea/
+*.swp
+
 
 # ==========================================
 # 5. Sistema Operativo / Diversos
