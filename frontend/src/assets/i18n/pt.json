@@ -1,0 +1,60 @@
+{
+  "AUTH": {
+    "LOGIN_TITLE": "Entrar",
+    "REGISTER_TITLE": "Criar Conta",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "NAME": "Nome completo",
+    "CONFIRM_PASSWORD": "Confirmar password",
+    "SUBMIT_LOGIN": "Entrar",
+    "SUBMIT_REGISTER": "Criar conta",
+    "NO_ACCOUNT": "Não tem conta?",
+    "HAS_ACCOUNT": "Já tem conta?",
+    "FORGOT": "Esqueceu a senha?",
+    "REGISTER_LINK": "Registar",
+    "LOGIN_LINK": "Entrar"
+  },
+  "QUEUE": {
+    "TITLE": "Filas Disponíveis",
+    "JOIN": "Entrar na fila",
+    "MY_TICKETS": "Os meus Tickets",
+    "WAITING": "Em espera",
+    "CALLED": "Chamado!",
+    "SERVED": "Servido",
+    "CANCELLED": "Cancelado",
+    "NO_QUEUES": "Não há filas abertas de momento.",
+    "ALREADY_IN": "Já tens ticket",
+    "QUEUE_CLOSED": "Fila fechada"
+  },
+  "ATTENDANT": {
+    "TITLE": "Painel do Funcionário",
+    "CALL_NEXT": "Chamar próximo",
+    "MARK_SERVED": "Marcar como servido",
+    "NO_SHOW": "Não compareceu",
+    "NO_TICKETS": "Sem tickets em espera"
+  },
+  "ADMIN": {
+    "TITLE": "Painel Administrativo",
+    "CREATE_QUEUE": "Criar Fila",
+    "EDIT_QUEUE": "Editar Fila",
+    "DELETE_QUEUE": "Eliminar Fila"
+  },
+  "COMMON": {
+    "LOGOUT": "Sair",
+    "LOADING": "A carregar...",
+    "SAVE": "Guardar",
+    "CANCEL": "Cancelar",
+    "DELETE": "Eliminar",
+    "EDIT": "Editar",
+    "TOGGLE_THEME": "Alternar tema",
+    "LANGUAGE": "Idioma"
+  },
+  "ERRORS": {
+    "REQUIRED": "Campo obrigatório",
+    "EMAIL_INVALID": "Email inválido",
+    "MIN_LENGTH": "Mínimo {{min}} caracteres",
+    "PASSWORDS_MISMATCH": "As passwords não coincidem",
+    "NETWORK": "Sem ligação à internet",
+    "SERVER": "Erro do servidor. Tente mais tarde."
+  }
+}

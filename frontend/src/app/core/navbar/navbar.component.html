@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <a class="brand" routerLink="/">QSERVE</a>
+
+  <div class="nav-links">
+    @if (user$ | async; as user) {
+      @if (user.role === 'student' || user.role === 'admin') {
+        <a routerLink="/queue" routerLinkActive="active">Filas</a>
+      }
+      @if (user.role === 'attendant' || user.role === 'admin') {
+        <a routerLink="/attendant" routerLinkActive="active">Atendimento</a>
+      }
+      @if (user.role === 'admin') {
+        <a routerLink="/admin" routerLinkActive="active">Admin</a>
+      }
+    }
+  </div>
+
+  <div class="actions">
+    <button class="btn-icon" (click)="setLang('pt')" title="Português">PT</button>
+    <button class="btn-icon" (click)="setLang('en')" title="English">EN</button>
+
+    <button class="btn-icon" (click)="toggleTheme()" [title]="'COMMON.TOGGLE_THEME' | translate">
+      @if ((theme$ | async) === 'dark') { ☀️ } @else { 🌙 }
+    </button>
+
+    @if (user$ | async) {
+      <button class="btn-logout" (click)="logout()">
+        {{ 'COMMON.LOGOUT' | translate }}
+      </button>
+    }
+  </div>
+</nav>

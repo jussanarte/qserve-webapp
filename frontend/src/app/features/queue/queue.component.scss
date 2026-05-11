@@ -1,0 +1,126 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.page-header {
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+}
+
+.section { margin-bottom: 32px; }
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tickets-list { display: flex; flex-direction: column; gap: 8px; }
+
+.ticket-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+
+  &.called { border-color: var(--color-secondary); background: #FFF4EE; }
+}
+
+.ticket-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-secondary);
+  min-width: 70px;
+}
+
+.ticket-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.queues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.queue-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.2s, transform 0.2s;
+
+  &:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+}
+
+.queue-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h3 { font-size: 16px; font-weight: 600; color: var(--color-text); }
+}
+
+.desc { font-size: 14px; color: var(--color-text-muted); }
+
+.queue-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &.open,    &.served  { background: #F0FDF4; color: #15803D; }
+  &.waiting             { background: #FFFBEB; color: #92400E; }
+  &.called              { background: #FFF4EE; color: var(--color-secondary); }
+  &.paused              { background: #FFF8E1; color: #B45309; }
+  &.closed, &.cancelled { background: #F3F4F6; color: #6B7280; }
+}
+
+.btn-join {
+  padding: 10px;
+  background: var(--color-secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  min-height: 40px;
+
+  &:hover:not(:disabled) { background: #D43D00; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; background: var(--color-text-muted); }
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--color-text-muted);
+}

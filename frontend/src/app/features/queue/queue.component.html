@@ -1,0 +1,66 @@
+<div class="page">
+
+  <div class="page-header">
+    <h1>{{ 'QUEUE.TITLE' | translate }}</h1>
+  </div>
+
+  @if (loading) {
+    <div class="loading">{{ 'COMMON.LOADING' | translate }}</div>
+  }
+
+  @if (myTickets.length > 0) {
+    <div class="section">
+      <h2 class="section-title">{{ 'QUEUE.MY_TICKETS' | translate }}</h2>
+      <div class="tickets-list">
+        @for (t of myTickets; track t.id) {
+          <div class="ticket-card" [class]="t.status">
+            <div class="ticket-number">{{ t.ticket_number }}</div>
+            <div class="ticket-info">
+              <strong>{{ t.queue_name }}</strong>
+              <span class="badge" [class]="t.status">
+                {{ 'QUEUE.' + t.status.toUpperCase() | translate }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  @if (!loading) {
+    <div class="queues-grid">
+      @for (q of queues; track q.id) {
+        <div class="queue-card">
+          <div class="queue-header">
+            <h3>{{ q.name }}</h3>
+            <span class="badge" [class]="q.status">{{ q.status }}</span>
+          </div>
+          @if (q.description) {
+            <p class="desc">{{ q.description }}</p>
+          }
+          <div class="queue-stats">
+            <span>⏳ {{ q.waiting_count }} em espera</span>
+            <span>⏱ ~{{ q.avg_service_time }} min</span>
+          </div>
+          <button
+            class="btn-join"
+            [disabled]="q.status !== 'open' || hasActiveTicket(q.id) || joiningId === q.id"
+            (click)="join(q.id)">
+            @if (hasActiveTicket(q.id)) {
+              {{ 'QUEUE.ALREADY_IN' | translate }} — {{ getActiveTicket(q.id)?.ticket_number }}
+            } @else if (q.status !== 'open') {
+              {{ 'QUEUE.QUEUE_CLOSED' | translate }}
+            } @else {
+              {{ joiningId === q.id ? ('COMMON.LOADING' | translate) : ('QUEUE.JOIN' | translate) }}
+            }
+          </button>
+        </div>
+      }
+
+      @if (queues.length === 0) {
+        <div class="empty">{{ 'QUEUE.NO_QUEUES' | translate }}</div>
+      }
+    </div>
+  }
+
+</div>

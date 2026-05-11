@@ -1,0 +1,67 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="brand">
+      <span class="brand-name">QSERVE</span>
+      <span class="brand-sub">{{ 'AUTH.REGISTER_TITLE' | translate }}</span>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="field">
+        <label>{{ 'AUTH.NAME' | translate }}</label>
+        <input type="text" formControlName="name" placeholder="O seu nome" />
+        @if (form.get('name')?.invalid && form.get('name')?.touched) {
+          <span class="err">{{ 'ERRORS.REQUIRED' | translate }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>{{ 'AUTH.EMAIL' | translate }}</label>
+        <input type="email" formControlName="email" placeholder="o.seu@email.ao" />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="err">{{ 'ERRORS.EMAIL_INVALID' | translate }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>{{ 'AUTH.PASSWORD' | translate }}</label>
+        <input type="password" formControlName="password" placeholder="••••••" />
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <span class="err">{{ 'ERRORS.REQUIRED' | translate }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>{{ 'AUTH.CONFIRM_PASSWORD' | translate }}</label>
+        <input type="password" formControlName="passwordConfirm" placeholder="••••••" />
+        @if (form.hasError('mismatch') && form.get('passwordConfirm')?.touched) {
+          <span class="err">{{ 'ERRORS.PASSWORDS_MISMATCH' | translate }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>{{ 'COMMON.LANGUAGE' | translate }}</label>
+        <select formControlName="language">
+          <option value="pt">Português</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+      @if (error) {
+        <div class="alert">{{ error }}</div>
+      }
+
+      <button type="submit" [disabled]="form.invalid || loading" class="btn-primary">
+        {{ loading ? ('COMMON.LOADING' | translate) : ('AUTH.SUBMIT_REGISTER' | translate) }}
+      </button>
+
+    </form>
+
+    <p class="link">
+      {{ 'AUTH.HAS_ACCOUNT' | translate }}
+      <a routerLink="/auth/login">{{ 'AUTH.LOGIN_LINK' | translate }}</a>
+    </p>
+
+  </div>
+</div>

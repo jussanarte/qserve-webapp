@@ -1,0 +1,113 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  padding: 16px;
+}
+
+.login-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow-md);
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 32px;
+
+  &-name {
+    display: block;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-secondary);
+    letter-spacing: 3px;
+  }
+
+  &-sub {
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+}
+
+.field {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--color-text);
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 15px;
+    transition: border 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-secondary);
+      box-shadow: 0 0 0 3px rgba(242,76,0,0.12);
+    }
+  }
+}
+
+.err {
+  font-size: 12px;
+  color: var(--color-danger);
+  margin-top: 4px;
+  display: block;
+}
+
+.alert {
+  background: #FFF1F1;
+  color: var(--color-danger);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  border-left: 3px solid var(--color-danger);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: var(--color-secondary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+  min-height: 44px;
+
+  &:hover:not(:disabled) {
+    background: #D43D00;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
