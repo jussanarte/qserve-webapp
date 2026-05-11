@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
@@ -16,16 +16,24 @@ export class LoginComponent {
   form: FormGroup;
   loading = false;
   error   = '';
+  currentLang = localStorage.getItem('qserve-lang') ?? 'pt';
 
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.form = this.fb.group({
       email:    ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+  }
+
+  setLang(lang: string): void {
+    this.currentLang = lang;
+    this.translate.use(lang);
+    localStorage.setItem('qserve-lang', lang);
   }
 
   submit(): void {

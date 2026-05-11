@@ -42,7 +42,7 @@
 
       <div class="field">
         <label>{{ 'COMMON.LANGUAGE' | translate }}</label>
-        <select formControlName="language">
+        <select formControlName="language" (change)="setLang($any($event.target).value)">
           <option value="pt">Português</option>
           <option value="en">English</option>
         </select>

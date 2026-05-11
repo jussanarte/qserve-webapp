@@ -65,7 +65,10 @@ apache/logs/
 *.code-workspace
 .idea/
 *.swp
-
+*.edge-debug/
+*.edge-debug-profile/
+*.edge-debug-profile-*/
+*.edge-profile/
 
 # ==========================================
 # 5. Sistema Operativo / Diversos

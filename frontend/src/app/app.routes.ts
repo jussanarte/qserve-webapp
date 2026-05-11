@@ -3,11 +3,21 @@ import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/queue', pathMatch: 'full' },
   {
-    path: 'auth',
-    loadChildren: () =>
-      import('./features/auth/auth.routes').then(m => m.authRoutes)
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./features/auth/components/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'auth/login',
+    loadComponent: () =>
+      import('./features/auth/components/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'auth/register',
+    loadComponent: () =>
+      import('./features/auth/components/register/register.component').then(m => m.RegisterComponent)
   },
   {
     path: 'queue',

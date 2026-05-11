@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
@@ -20,7 +20,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.form = this.fb.group({
       name:            ['', [Validators.required, Validators.minLength(3)]],
@@ -35,6 +36,11 @@ export class RegisterComponent {
     const pass    = group.get('password')?.value;
     const confirm = group.get('passwordConfirm')?.value;
     return pass === confirm ? null : { mismatch: true };
+  }
+
+  setLang(lang: string): void {
+    this.translate.use(lang);
+    localStorage.setItem('qserve-lang', lang);
   }
 
   submit(): void {

@@ -16,6 +16,7 @@ export interface Ticket {
   id: number;
   queue_id: number;
   queue_name: string;
+  user_name?: string;
   ticket_number: string;
   status: TicketStatus;
   position?: number;

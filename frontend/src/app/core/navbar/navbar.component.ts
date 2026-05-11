@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -13,14 +13,12 @@ import { ThemeService } from '../services/theme.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  private auth = inject(AuthService);
+  private theme = inject(ThemeService);
+  private translate = inject(TranslateService);
+
   user$  = this.auth.currentUser;
   theme$ = this.theme.getTheme$();
-
-  constructor(
-    private auth: AuthService,
-    private theme: ThemeService,
-    private translate: TranslateService
-  ) {}
 
   toggleTheme(): void { this.theme.toggle(); }
 
