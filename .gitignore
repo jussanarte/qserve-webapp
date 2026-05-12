@@ -1,78 +1,190 @@
-# ==========================================
-# 1. PHP / Backend (Laravel ou PHP Puro)
-# ==========================================
-vendor/
-.env
-.env.backup
-.env.production
-composer.phar
-*.log
+# =========================================================
+# UNIVERSAL GITIGNORE
+# Stack:
+# - PHP 8 / Laravel / PHP Puro
+# - Angular
+# - MySQL / XAMPP
+# - VS Code
+# =========================================================
 
-# Específico para Laravel
+# =========================================================
+# 1. ENV / SECURITY / LOGS
+# =========================================================
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Secrets / keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Logs
+*.log
+logs/
+
+# =========================================================
+# 2. PHP / COMPOSER
+# =========================================================
+
+# Composer dependencies
+vendor/
+
+# Composer executable
+composer.phar
+
+# PHP cache / temp
+*.cache
+.phpunit.result.cache
+
+# PHPUnit
+.phpunit.cache/
+
+# =========================================================
+# 3. LARAVEL
+# =========================================================
+
+# Laravel storage
 storage/*.key
+storage/logs/*
 storage/framework/cache/data/*
 storage/framework/sessions/*
 storage/framework/testing/*
 storage/framework/views/*
-storage/logs/*
 
-# ==========================================
-# 2. Angular / Frontend
-# ==========================================
+# Laravel generated
+bootstrap/cache/*.php
+
+# =========================================================
+# 4. ANGULAR / NODE
+# =========================================================
+
+# Dependencies
 node_modules/
-dist/
-tmp/
-out-of-memory.log
+
+# Angular cache
 .angular/
+.angular/cache/
 
-# Tailwind - Ficheiros de build e cache
-.tailwindcss/
-tailwind.config.js.map
-*.css.map
+# Build outputs
+dist/
+out-tsc/
+tmp/
+coverage/
 
-# Se estiver a usar o Bootstrap via ficheiros compilados manualmente (menos comum em Angular)
-# assets/css/bootstrap.css.map
-# assets/js/bootstrap.bundle.min.js.map
+# Vite / cache
+.vite/
 
-# Logs de erro de ferramentas de CSS (PostCSS, Sass)
-.sass-cache/
-*.log
-
-# Ficheiros de logs de erro do NPM
+# Package manager logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# ==========================================
-# 3. MySQL / XAMPP
-# ==========================================
-# Nunca versionar os dados reais da DB ou backups automáticos
+# TypeScript cache
+*.tsbuildinfo
+
+# =========================================================
+# 5. CSS / SASS / TAILWIND
+# =========================================================
+
+# Sass
+.sass-cache/
+
+# Tailwind
+.tailwindcss/
+
+# Source maps
+*.css.map
+*.js.map
+
+# =========================================================
+# 6. DATABASE / XAMPP
+# =========================================================
+
+# Database dumps
+*.sql
+*.sql.bak
+*.sqlite
+*.sqlite3
+*.db
+
+# XAMPP / Apache / phpMyAdmin
+apache/logs/
 mysql/data/
 phpmyadmin/config.inc.php
-apache/logs/
-*.sql
-*.sqlite
-*.sql.bak
 
-# ==========================================
-# 4. VS Code / IDE
-# ==========================================
+# =========================================================
+# 7. TESTS / REPORTS
+# =========================================================
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Screenshots
+__screenshots__/
+playwright-report/
+test-results/
+
+# =========================================================
+# 8. IDE / EDITORS
+# =========================================================
+
+# VS Code
 .vscode/*
-!.vscode/extensions.json
 !.vscode/settings.json
+!.vscode/tasks.json
 !.vscode/launch.json
-.history/
-*.code-workspace
-.idea/
-*.swp
-*.edge-debug/
-*.edge-debug-profile/
-*.edge-debug-profile-*/
-*.edge-profile/
+!.vscode/extensions.json
 
-# ==========================================
-# 5. Sistema Operativo / Diversos
-# ==========================================
-Thumbs.db
+# JetBrains
+.idea/
+
+# Workspace
+*.code-workspace
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+
+# History
+.history/
+
+# =========================================================
+# 9. OS FILES
+# =========================================================
+
+# macOS
 .DS_Store
+
+# Windows
+Thumbs.db
 desktop.ini
+
+# Linux
+*~
+
+# =========================================================
+# 10. OPTIONAL (UNCOMMENT AS NEEDED)
+# =========================================================
+
+# Build local
+public/build/
+
+# Uploaded files
+uploads/
+
+# Generated PDFs
+ *.pdf
+
+# Generated CSVs
+ *.csv
