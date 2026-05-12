@@ -1,0 +1,95 @@
+<div class="staff-list">
+  <div class="list-header">
+    <h1 class="page-title">{{ 'STAFF.TITLE' | translate }}</h1>
+    <button class="btn-primary" type="button" (click)="openCreate()">{{ 'STAFF.NEW' | translate }}</button>
+  </div>
+
+  @if (loading) {
+    <div class="loading">{{ 'COMMON.LOADING' | translate }}</div>
+  }
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>{{ 'ADMIN.NAME' | translate }}</th>
+          <th>{{ 'AUTH.EMAIL' | translate }}</th>
+          <th>{{ 'COMMON.LANGUAGE' | translate }}</th>
+          <th>{{ 'ADMIN.STATUS' | translate }}</th>
+          <th>{{ 'ADMIN.ACTIONS' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of attendants; track user.id) {
+          <tr>
+            <td><strong>{{ user.name }}</strong></td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.language.toUpperCase() }}</td>
+            <td>
+              <span class="badge" [class.inactive]="!user.is_active">
+                {{ (user.is_active ? 'STAFF.ACTIVE' : 'STAFF.INACTIVE') | translate }}
+              </span>
+            </td>
+            <td class="actions">
+              <button class="btn-sm" type="button" (click)="openEdit(user)">{{ 'COMMON.EDIT' | translate }}</button>
+              <button class="btn-sm btn-red" type="button" (click)="remove(user)">{{ 'COMMON.DELETE' | translate }}</button>
+            </td>
+          </tr>
+        }
+        @if (attendants.length === 0 && !loading) {
+          <tr><td colspan="5" class="empty">{{ 'STAFF.EMPTY' | translate }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (showModal) {
+  <div class="overlay" (click)="showModal = false">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ editingUser ? ('STAFF.EDIT' | translate) : ('STAFF.NEW' | translate) }}</h2>
+        <button class="btn-close" type="button" (click)="showModal = false">x</button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="field">
+          <label>{{ 'ADMIN.NAME' | translate }}</label>
+          <input formControlName="name" />
+        </div>
+        <div class="field">
+          <label>{{ 'AUTH.EMAIL' | translate }}</label>
+          <input type="email" formControlName="email" />
+        </div>
+        <div class="field">
+          <label>{{ 'AUTH.PASSWORD' | translate }}</label>
+          <input type="password" formControlName="password" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>{{ 'COMMON.LANGUAGE' | translate }}</label>
+            <select formControlName="language">
+              <option value="pt">PT</option>
+              <option value="en">EN</option>
+            </select>
+          </div>
+          <label class="check-field">
+            <input type="checkbox" formControlName="is_active" />
+            {{ 'STAFF.ACTIVE' | translate }}
+          </label>
+        </div>
+
+        @if (error) {
+          <div class="alert">{{ error }}</div>
+        }
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" (click)="showModal = false">{{ 'COMMON.CANCEL' | translate }}</button>
+          <button type="submit" class="btn-primary" [disabled]="form.invalid || saving">
+            {{ saving ? ('COMMON.LOADING' | translate) : ('COMMON.SAVE' | translate) }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

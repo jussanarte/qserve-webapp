@@ -32,4 +32,26 @@ class AuthController {
             ResponseHelper::error($e->getMessage(), 401);
         }
     }
+
+    public function forgotPassword(): void {
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
+        try {
+            $result = $this->service->forgotPassword($data['email'] ?? '');
+            ResponseHelper::success($result, 'Pedido de recuperacao registado');
+        } catch (\InvalidArgumentException $e) {
+            ResponseHelper::error('Dados invalidos', 422, json_decode($e->getMessage(), true));
+        }
+    }
+
+    public function resetPassword(): void {
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
+        try {
+            $this->service->resetPassword($data['token'] ?? '', $data['password'] ?? '');
+            ResponseHelper::success(null, 'Password actualizada');
+        } catch (\InvalidArgumentException $e) {
+            ResponseHelper::error('Dados invalidos', 422, json_decode($e->getMessage(), true));
+        } catch (\RuntimeException $e) {
+            ResponseHelper::error($e->getMessage(), 400);
+        }
+    }
 }

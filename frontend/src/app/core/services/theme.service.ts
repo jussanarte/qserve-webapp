@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -17,8 +17,8 @@ export class ThemeService {
     this.apply(theme);
   }
 
-  getTheme$()  { return this.theme$.asObservable(); }
-  getTheme()   { return this.theme$.value; }
+  getTheme$(): Observable<'light' | 'dark'> { return this.theme$.asObservable(); }
+  getTheme(): 'light' | 'dark' { return this.theme$.value; }
 
   private apply(theme: 'light' | 'dark'): void {
     document.documentElement.setAttribute('data-theme', theme);

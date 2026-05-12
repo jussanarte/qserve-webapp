@@ -7,6 +7,8 @@ export interface User {
   role: UserRole;
   language: 'pt' | 'en';
   dark_mode: boolean;
+  is_active: boolean;
+  created_at?: string;
 }
 
 export interface AuthResponse {
@@ -24,7 +26,26 @@ export interface RegisterData {
   name: string;
   email: string;
   password: string;
+  role?: 'student' | 'admin';
   language?: string;
+}
+
+export interface StaffFormData {
+  name: string;
+  email: string;
+  password?: string;
+  language: 'pt' | 'en';
+  is_active?: boolean;
+}
+
+export interface ForgotPasswordResponse {
+  reset_token: string;
+  expires_at: string;
+}
+
+export interface ResetPasswordData {
+  token: string;
+  password: string;
 }
 
 export interface ApiResponse<T> {

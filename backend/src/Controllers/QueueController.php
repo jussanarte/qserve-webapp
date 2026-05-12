@@ -91,8 +91,12 @@ class QueueController {
     public function updateTicketStatus(int $ticketId): void {
         AuthMiddleware::requireRole(['admin', 'attendant']);
         $data = json_decode(file_get_contents('php://input'), true) ?? [];
-        $this->service->updateTicketStatus($ticketId, $data['status'] ?? '');
-        ResponseHelper::success(null, 'Status actualizado');
+        try {
+            $this->service->updateTicketStatus($ticketId, $data['status'] ?? '');
+            ResponseHelper::success(null, 'Status actualizado');
+        } catch (\RuntimeException $e) {
+            ResponseHelper::error($e->getMessage(), 400);
+        }
     }
 
     public function myTickets(): void {

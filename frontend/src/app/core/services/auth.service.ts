@@ -3,7 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { User, UserRole, AuthResponse, LoginCredentials, RegisterData, ApiResponse } from '../models/user.model';
+import {
+  User,
+  UserRole,
+  AuthResponse,
+  LoginCredentials,
+  RegisterData,
+  ApiResponse,
+  ForgotPasswordResponse,
+  ResetPasswordData,
+} from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -25,6 +34,17 @@ export class AuthService {
     return this.http
       .post<ApiResponse<AuthResponse>>(`${environment.apiUrl}/auth/register`, data)
       .pipe(tap(res => this.saveSession(res.data)));
+  }
+
+  forgotPassword(email: string): Observable<ApiResponse<ForgotPasswordResponse>> {
+    return this.http.post<ApiResponse<ForgotPasswordResponse>>(
+      `${environment.apiUrl}/auth/forgot-password`,
+      { email }
+    );
+  }
+
+  resetPassword(data: ResetPasswordData): Observable<ApiResponse<null>> {
+    return this.http.post<ApiResponse<null>>(`${environment.apiUrl}/auth/reset-password`, data);
   }
 
   logout(): void {

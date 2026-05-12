@@ -1,11 +1,14 @@
 {
   "AUTH": {
     "LOGIN_TITLE": "Sign in",
-    "REGISTER_TITLE": "Create Account",
+    "REGISTER_TITLE": "Create account",
     "EMAIL": "Email",
     "PASSWORD": "Password",
     "NAME": "Full name",
     "CONFIRM_PASSWORD": "Confirm password",
+    "ROLE": "Account type",
+    "ROLE_STUDENT": "Student",
+    "ROLE_ADMIN": "Administrator",
     "SUBMIT_LOGIN": "Sign in",
     "SUBMIT_REGISTER": "Create account",
     "NO_ACCOUNT": "Don't have an account?",
@@ -14,30 +17,95 @@
     "REGISTER_LINK": "Register",
     "LOGIN_LINK": "Sign in"
   },
+  "NAV": {
+    "QUEUES": "Queues",
+    "ATTENDANT": "Attendant",
+    "ADMIN": "Admin",
+    "DASHBOARD": "Dashboard",
+    "STAFF": "Staff",
+    "REPORTS": "Reports"
+  },
+  "QUEUE_STATUS": {
+    "OPEN": "Open",
+    "PAUSED": "Paused",
+    "CLOSED": "Closed"
+  },
   "QUEUE": {
-    "TITLE": "Available Queues",
+    "TITLE": "Available queues",
     "JOIN": "Join queue",
-    "MY_TICKETS": "My Tickets",
+    "MY_TICKETS": "My tickets",
     "WAITING": "Waiting",
-    "CALLED": "Called!",
+    "CALLED": "Called",
     "SERVED": "Served",
     "CANCELLED": "Cancelled",
     "NO_QUEUES": "No queues available at the moment.",
     "ALREADY_IN": "Already in queue",
-    "QUEUE_CLOSED": "Queue closed"
+    "QUEUE_CLOSED": "Queue closed",
+    "SHOW_QR": "Show QR",
+    "TICKET": "Ticket",
+    "QR_HINT": "Show this code at the counter",
+    "WAITING_COUNT": "{{count}} waiting",
+    "AVG_TIME": "~{{minutes}} min"
   },
   "ATTENDANT": {
-    "TITLE": "Attendant Panel",
+    "TITLE": "Attendant panel",
     "CALL_NEXT": "Call next",
     "MARK_SERVED": "Mark as served",
     "NO_SHOW": "No show",
-    "NO_TICKETS": "No tickets waiting"
+    "NO_TICKETS": "No tickets waiting",
+    "NOW_SERVING": "Now serving",
+    "WAITING_COUNT": "{{count}} waiting"
   },
   "ADMIN": {
-    "TITLE": "Admin Panel",
-    "CREATE_QUEUE": "Create Queue",
-    "EDIT_QUEUE": "Edit Queue",
-    "DELETE_QUEUE": "Delete Queue"
+    "TITLE": "Admin panel",
+    "CREATE_QUEUE": "Create queue",
+    "EDIT_QUEUE": "Edit queue",
+    "DELETE_QUEUE": "Delete queue",
+    "QUEUE_MANAGEMENT": "Queue management",
+    "NEW_QUEUE": "New queue",
+    "NAME": "Name",
+    "STATUS": "Status",
+    "CAPACITY": "Capacity",
+    "WAITING": "Waiting",
+    "ACTIONS": "Actions",
+    "OPEN": "Open",
+    "PAUSE": "Pause",
+    "CLOSE": "Close",
+    "DESCRIPTION": "Description",
+    "MAX_CAPACITY": "Maximum capacity",
+    "AVG_SERVICE_TIME": "Average time (min)",
+    "INITIAL_STATUS": "Initial status",
+    "NO_QUEUES": "No queues created."
+  },
+  "STAFF": {
+    "TITLE": "Staff management",
+    "NEW": "New attendant",
+    "EDIT": "Edit attendant",
+    "EMPTY": "No attendants registered.",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive"
+  },
+  "DASHBOARD": {
+    "LOADING": "Loading statistics...",
+    "USERS": "Users",
+    "ACTIVE_QUEUES": "Active queues",
+    "TICKETS_TODAY": "Tickets today",
+    "AVG_TIME": "Average time",
+    "TICKET_STATUS": "Ticket status",
+    "BY_HOUR": "Tickets by hour",
+    "QUEUE_SUMMARY": "Queue summary",
+    "QUEUE": "Queue",
+    "SERVED_TODAY": "Served today"
+  },
+  "REPORTS": {
+    "TITLE": "Reports",
+    "TICKETS_TITLE": "Ticket report",
+    "DESC": "Export all tickets for the selected period.",
+    "DATE_FROM": "Start date",
+    "DATE_TO": "End date",
+    "EXPORT_CSV": "Export CSV",
+    "EXPORT_PDF": "Export PDF",
+    "EXPORTING": "Exporting..."
   },
   "COMMON": {
     "LOGOUT": "Sign out",

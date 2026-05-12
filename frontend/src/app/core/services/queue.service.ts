@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { Queue, Ticket, ApiResponse } from '../models/queue.model';
+import { Queue, QueueStatus, Ticket, TicketStatus, ApiResponse } from '../models/queue.model';
 
 @Injectable({ providedIn: 'root' })
 export class QueueService {
@@ -31,7 +31,7 @@ export class QueueService {
       .pipe(map(r => r.data));
   }
 
-  changeStatus(id: number, status: string): Observable<Queue> {
+  changeStatus(id: number, status: QueueStatus): Observable<Queue> {
     return this.http.patch<ApiResponse<Queue>>(`${this.api}/queues/${id}/status`, { status })
       .pipe(map(r => r.data));
   }
@@ -55,7 +55,7 @@ export class QueueService {
       .pipe(map(r => r.data));
   }
 
-  updateTicketStatus(ticketId: number, status: string): Observable<void> {
+  updateTicketStatus(ticketId: number, status: TicketStatus): Observable<void> {
     return this.http.patch<void>(`${this.api}/tickets/${ticketId}/status`, { status });
   }
 

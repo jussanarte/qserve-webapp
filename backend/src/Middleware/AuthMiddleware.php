@@ -6,13 +6,13 @@ use App\Helpers\ResponseHelper;
 
 class AuthMiddleware {
     public static function handle(): void {
-        $header = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+        $header = self::authorizationHeader();
 
-        if (!str_starts_with($header, 'Bearer ')) {
+        if (!preg_match('/^Bearer\s+(.+)$/i', $header, $matches)) {
             ResponseHelper::error('Token em falta', 401);
         }
 
-        $token = substr($header, 7);
+        $token = trim($matches[1]);
         $payload = JwtHelper::decode($token);
 
         if (empty($payload)) {
@@ -29,5 +29,30 @@ class AuthMiddleware {
         if (!in_array($_REQUEST['auth_role'], $roles)) {
             ResponseHelper::error('Acesso negado', 403);
         }
+    }
+
+    private static function authorizationHeader(): string {
+        $candidates = [
+            $_SERVER['HTTP_AUTHORIZATION'] ?? '',
+            $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '',
+            $_SERVER['Authorization'] ?? '',
+        ];
+
+        if (function_exists('apache_request_headers')) {
+            $headers = apache_request_headers();
+            foreach ($headers as $name => $value) {
+                if (strtolower($name) === 'authorization') {
+                    $candidates[] = $value;
+                }
+            }
+        }
+
+        foreach ($candidates as $candidate) {
+            if (is_string($candidate) && trim($candidate) !== '') {
+                return trim($candidate);
+            }
+        }
+
+        return '';
     }
 }

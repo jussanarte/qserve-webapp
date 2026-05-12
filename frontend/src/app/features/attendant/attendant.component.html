@@ -3,53 +3,49 @@
     <h1>{{ 'ATTENDANT.TITLE' | translate }}</h1>
   </div>
 
-  <!-- Seleccionar fila -->
   <div class="queue-selector">
     @for (q of queues; track q.id) {
       <button
         class="queue-btn"
+        type="button"
         [class.active]="selectedQueue?.id === q.id"
         (click)="selectQueue(q)">
         {{ q.name }}
-        <span class="badge" [class]="q.status">{{ q.status }}</span>
+        <span class="badge" [class]="q.status">{{ 'QUEUE_STATUS.' + q.status.toUpperCase() | translate }}</span>
       </button>
     }
   </div>
 
   @if (selectedQueue) {
     <div class="panel">
-
-      <!-- Ticket chamado -->
       @if (calledTicket) {
         <div class="called-panel">
-          <div class="called-label">A atender</div>
+          <div class="called-label">{{ 'ATTENDANT.NOW_SERVING' | translate }}</div>
           <div class="called-number">{{ calledTicket.ticket_number }}</div>
-          <div class="called-name">{{ calledTicket['user_name'] }}</div>
+          <div class="called-name">{{ calledTicket.user_name }}</div>
           <div class="called-actions">
-            <button class="btn-served" (click)="markServed()">
+            <button class="btn-served" type="button" (click)="markServed()">
               {{ 'ATTENDANT.MARK_SERVED' | translate }}
             </button>
-            <button class="btn-noshow" (click)="markNoShow()">
+            <button class="btn-noshow" type="button" (click)="markNoShow()">
               {{ 'ATTENDANT.NO_SHOW' | translate }}
             </button>
           </div>
         </div>
       }
 
-      <!-- Botão chamar próximo -->
-      <button class="btn-call" (click)="callNext()" [disabled]="waitingTickets.length === 0">
+      <button class="btn-call" type="button" (click)="callNext()" [disabled]="waitingTickets.length === 0">
         {{ 'ATTENDANT.CALL_NEXT' | translate }}
         @if (waitingTickets.length > 0) {
-          ({{ waitingTickets.length }} em espera)
+          ({{ 'ATTENDANT.WAITING_COUNT' | translate: { count: waitingTickets.length } }})
         }
       </button>
 
-      <!-- Lista de tickets -->
       <div class="tickets-list">
         @for (t of waitingTickets; track t.id) {
           <div class="ticket-row">
             <span class="t-number">{{ t.ticket_number }}</span>
-            <span class="t-name">{{ t['user_name'] }}</span>
+            <span class="t-name">{{ t.user_name }}</span>
             <span class="badge waiting">{{ 'QUEUE.WAITING' | translate }}</span>
           </div>
         }
@@ -57,7 +53,6 @@
           <div class="empty">{{ 'ATTENDANT.NO_TICKETS' | translate }}</div>
         }
       </div>
-
     </div>
   }
 </div>

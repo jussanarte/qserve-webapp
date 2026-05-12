@@ -1,16 +1,14 @@
 <div class="login-page">
   <div class="login-card">
-
     <div class="brand">
       <span class="brand-name">QSERVE</span>
       <span class="brand-sub">Refeitório Digital</span>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
-
       <div class="field">
         <label>{{ 'AUTH.EMAIL' | translate }}</label>
-        <input type="email" formControlName="email" placeholder="o.seu@email.ao" />
+        <input type="email" formControlName="email" />
         @if (form.get('email')?.invalid && form.get('email')?.touched) {
           <span class="err">{{ 'ERRORS.EMAIL_INVALID' | translate }}</span>
         }
@@ -18,7 +16,7 @@
 
       <div class="field">
         <label>{{ 'AUTH.PASSWORD' | translate }}</label>
-        <input type="password" formControlName="password" placeholder="••••••" />
+        <input type="password" formControlName="password" />
         @if (form.get('password')?.invalid && form.get('password')?.touched) {
           <span class="err">{{ 'ERRORS.REQUIRED' | translate }}</span>
         }
@@ -26,7 +24,7 @@
 
       <div class="field">
         <label>{{ 'COMMON.LANGUAGE' | translate }}</label>
-        <select [value]="currentLang" (change)="setLang($any($event.target).value)">
+        <select [value]="currentLang" (change)="setLangFromEvent($event)">
           <option value="pt">Português</option>
           <option value="en">English</option>
         </select>
@@ -39,13 +37,11 @@
       <button type="submit" [disabled]="form.invalid || loading" class="btn-primary">
         {{ loading ? ('COMMON.LOADING' | translate) : ('AUTH.SUBMIT_LOGIN' | translate) }}
       </button>
-
     </form>
 
     <p class="link">
       {{ 'AUTH.NO_ACCOUNT' | translate }}
       <a routerLink="/auth/register">{{ 'AUTH.REGISTER_LINK' | translate }}</a>
     </p>
-
   </div>
 </div>

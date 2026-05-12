@@ -28,6 +28,7 @@ export class RegisterComponent {
       email:           ['', [Validators.required, Validators.email]],
       password:        ['', [Validators.required, Validators.minLength(6)]],
       passwordConfirm: ['', Validators.required],
+      role:            ['student'],
       language:        ['pt'],
     }, { validators: this.passwordMatch });
   }
@@ -43,6 +44,11 @@ export class RegisterComponent {
     localStorage.setItem('qserve-lang', lang);
   }
 
+  setLangFromEvent(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.setLang(select.value);
+  }
+
   submit(): void {
     if (this.form.invalid) return;
     this.loading = true;
@@ -51,7 +57,10 @@ export class RegisterComponent {
     const { passwordConfirm, ...data } = this.form.value;
 
     this.auth.register(data).subscribe({
-      next: () => this.router.navigate(['/queue']),
+      next: (res) => {
+        const target = res.data.user.role === 'admin' ? '/admin' : '/queue';
+        this.router.navigate([target]);
+      },
       error: (err) => {
         this.error   = err.error?.message ?? 'Erro ao registar';
         this.loading = false;

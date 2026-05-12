@@ -1,11 +1,14 @@
 {
   "AUTH": {
     "LOGIN_TITLE": "Entrar",
-    "REGISTER_TITLE": "Criar Conta",
+    "REGISTER_TITLE": "Criar conta",
     "EMAIL": "Email",
     "PASSWORD": "Password",
     "NAME": "Nome completo",
     "CONFIRM_PASSWORD": "Confirmar password",
+    "ROLE": "Tipo de conta",
+    "ROLE_STUDENT": "Estudante",
+    "ROLE_ADMIN": "Administrador",
     "SUBMIT_LOGIN": "Entrar",
     "SUBMIT_REGISTER": "Criar conta",
     "NO_ACCOUNT": "Não tem conta?",
@@ -14,30 +17,95 @@
     "REGISTER_LINK": "Registar",
     "LOGIN_LINK": "Entrar"
   },
+  "NAV": {
+    "QUEUES": "Filas",
+    "ATTENDANT": "Atendimento",
+    "ADMIN": "Admin",
+    "DASHBOARD": "Dashboard",
+    "STAFF": "Funcionários",
+    "REPORTS": "Relatórios"
+  },
+  "QUEUE_STATUS": {
+    "OPEN": "Aberta",
+    "PAUSED": "Pausada",
+    "CLOSED": "Fechada"
+  },
   "QUEUE": {
-    "TITLE": "Filas Disponíveis",
+    "TITLE": "Filas disponíveis",
     "JOIN": "Entrar na fila",
-    "MY_TICKETS": "Os meus Tickets",
+    "MY_TICKETS": "Os meus tickets",
     "WAITING": "Em espera",
-    "CALLED": "Chamado!",
+    "CALLED": "Chamado",
     "SERVED": "Servido",
     "CANCELLED": "Cancelado",
-    "NO_QUEUES": "Não há filas abertas de momento.",
+    "NO_QUEUES": "Não há filas disponíveis de momento.",
     "ALREADY_IN": "Já tens ticket",
-    "QUEUE_CLOSED": "Fila fechada"
+    "QUEUE_CLOSED": "Fila fechada",
+    "SHOW_QR": "Ver QR",
+    "TICKET": "Ticket",
+    "QR_HINT": "Apresente este código no balcão",
+    "WAITING_COUNT": "{{count}} em espera",
+    "AVG_TIME": "~{{minutes}} min"
   },
   "ATTENDANT": {
-    "TITLE": "Painel do Funcionário",
+    "TITLE": "Painel do funcionário",
     "CALL_NEXT": "Chamar próximo",
     "MARK_SERVED": "Marcar como servido",
     "NO_SHOW": "Não compareceu",
-    "NO_TICKETS": "Sem tickets em espera"
+    "NO_TICKETS": "Sem tickets em espera",
+    "NOW_SERVING": "A atender",
+    "WAITING_COUNT": "{{count}} em espera"
   },
   "ADMIN": {
-    "TITLE": "Painel Administrativo",
-    "CREATE_QUEUE": "Criar Fila",
-    "EDIT_QUEUE": "Editar Fila",
-    "DELETE_QUEUE": "Eliminar Fila"
+    "TITLE": "Painel administrativo",
+    "CREATE_QUEUE": "Criar fila",
+    "EDIT_QUEUE": "Editar fila",
+    "DELETE_QUEUE": "Eliminar fila",
+    "QUEUE_MANAGEMENT": "Gestão de filas",
+    "NEW_QUEUE": "Nova fila",
+    "NAME": "Nome",
+    "STATUS": "Estado",
+    "CAPACITY": "Capacidade",
+    "WAITING": "Em espera",
+    "ACTIONS": "Acções",
+    "OPEN": "Abrir",
+    "PAUSE": "Pausar",
+    "CLOSE": "Fechar",
+    "DESCRIPTION": "Descrição",
+    "MAX_CAPACITY": "Capacidade máxima",
+    "AVG_SERVICE_TIME": "Tempo médio (min)",
+    "INITIAL_STATUS": "Estado inicial",
+    "NO_QUEUES": "Sem filas criadas."
+  },
+  "STAFF": {
+    "TITLE": "Gestão de funcionários",
+    "NEW": "Novo funcionário",
+    "EDIT": "Editar funcionário",
+    "EMPTY": "Sem funcionários registados.",
+    "ACTIVE": "Activo",
+    "INACTIVE": "Inactivo"
+  },
+  "DASHBOARD": {
+    "LOADING": "A carregar estatísticas...",
+    "USERS": "Utilizadores",
+    "ACTIVE_QUEUES": "Filas activas",
+    "TICKETS_TODAY": "Tickets hoje",
+    "AVG_TIME": "Tempo médio",
+    "TICKET_STATUS": "Estado dos tickets",
+    "BY_HOUR": "Tickets por hora",
+    "QUEUE_SUMMARY": "Resumo por fila",
+    "QUEUE": "Fila",
+    "SERVED_TODAY": "Servidos hoje"
+  },
+  "REPORTS": {
+    "TITLE": "Relatórios",
+    "TICKETS_TITLE": "Relatório de tickets",
+    "DESC": "Exporta todos os tickets num período seleccionado.",
+    "DATE_FROM": "Data início",
+    "DATE_TO": "Data fim",
+    "EXPORT_CSV": "Exportar CSV",
+    "EXPORT_PDF": "Exportar PDF",
+    "EXPORTING": "A exportar..."
   },
   "COMMON": {
     "LOGOUT": "Sair",

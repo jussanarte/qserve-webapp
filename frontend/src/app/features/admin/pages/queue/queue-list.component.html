@@ -1,0 +1,108 @@
+<div class="queue-list">
+  <div class="list-header">
+    <h1 class="page-title">{{ 'ADMIN.QUEUE_MANAGEMENT' | translate }}</h1>
+    <button class="btn-primary" type="button" (click)="openCreate()">{{ 'ADMIN.NEW_QUEUE' | translate }}</button>
+  </div>
+
+  @if (loading) {
+    <div class="loading">{{ 'COMMON.LOADING' | translate }}</div>
+  }
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>{{ 'ADMIN.NAME' | translate }}</th>
+          <th>{{ 'ADMIN.STATUS' | translate }}</th>
+          <th>{{ 'ADMIN.CAPACITY' | translate }}</th>
+          <th>{{ 'ADMIN.WAITING' | translate }}</th>
+          <th>{{ 'ADMIN.ACTIONS' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (q of queues; track q.id) {
+          <tr>
+            <td>
+              <strong>{{ q.name }}</strong>
+              @if (q.description) {
+                <br><small>{{ q.description }}</small>
+              }
+            </td>
+            <td>
+              <span class="badge" [class]="q.status">{{ 'QUEUE_STATUS.' + q.status.toUpperCase() | translate }}</span>
+            </td>
+            <td>{{ q.waiting_count }} / {{ q.max_capacity }}</td>
+            <td>{{ q.waiting_count }}</td>
+            <td class="actions">
+              @if (q.status !== 'open') {
+                <button class="btn-sm btn-green" type="button" (click)="changeStatus(q, 'open')">{{ 'ADMIN.OPEN' | translate }}</button>
+              }
+              @if (q.status === 'open') {
+                <button class="btn-sm btn-amber" type="button" (click)="changeStatus(q, 'paused')">{{ 'ADMIN.PAUSE' | translate }}</button>
+              }
+              @if (q.status !== 'closed') {
+                <button class="btn-sm btn-gray" type="button" (click)="changeStatus(q, 'closed')">{{ 'ADMIN.CLOSE' | translate }}</button>
+              }
+              <button class="btn-sm" type="button" (click)="openEdit(q)">{{ 'COMMON.EDIT' | translate }}</button>
+              <button class="btn-sm btn-red" type="button" (click)="delete(q)">{{ 'COMMON.DELETE' | translate }}</button>
+            </td>
+          </tr>
+        }
+        @if (queues.length === 0 && !loading) {
+          <tr><td colspan="5" class="empty">{{ 'ADMIN.NO_QUEUES' | translate }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (showModal) {
+  <div class="overlay" (click)="showModal = false">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ editingQueue ? ('ADMIN.EDIT_QUEUE' | translate) : ('ADMIN.NEW_QUEUE' | translate) }}</h2>
+        <button class="btn-close" type="button" (click)="showModal = false">x</button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="field">
+          <label>{{ 'ADMIN.NAME' | translate }}</label>
+          <input formControlName="name" />
+        </div>
+        <div class="field">
+          <label>{{ 'ADMIN.DESCRIPTION' | translate }}</label>
+          <textarea formControlName="description" rows="2"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>{{ 'ADMIN.MAX_CAPACITY' | translate }}</label>
+            <input type="number" formControlName="max_capacity" min="1" />
+          </div>
+          <div class="field">
+            <label>{{ 'ADMIN.AVG_SERVICE_TIME' | translate }}</label>
+            <input type="number" formControlName="avg_service_time" min="1" />
+          </div>
+        </div>
+        <div class="field">
+          <label>{{ 'ADMIN.INITIAL_STATUS' | translate }}</label>
+          <select formControlName="status">
+            <option value="closed">{{ 'QUEUE_STATUS.CLOSED' | translate }}</option>
+            <option value="open">{{ 'QUEUE_STATUS.OPEN' | translate }}</option>
+            <option value="paused">{{ 'QUEUE_STATUS.PAUSED' | translate }}</option>
+          </select>
+        </div>
+
+        @if (error) {
+          <div class="alert">{{ error }}</div>
+        }
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" (click)="showModal = false">{{ 'COMMON.CANCEL' | translate }}</button>
+          <button type="submit" class="btn-primary" [disabled]="form.invalid || saving">
+            {{ saving ? ('COMMON.LOADING' | translate) : ('COMMON.SAVE' | translate) }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

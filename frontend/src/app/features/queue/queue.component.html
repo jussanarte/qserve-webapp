@@ -1,5 +1,4 @@
 <div class="page">
-
   <div class="page-header">
     <h1>{{ 'QUEUE.TITLE' | translate }}</h1>
   </div>
@@ -21,6 +20,9 @@
                 {{ 'QUEUE.' + t.status.toUpperCase() | translate }}
               </span>
             </div>
+            <button class="btn-qr" type="button" (click)="openQr(t)">
+              {{ 'QUEUE.SHOW_QR' | translate }}
+            </button>
           </div>
         }
       </div>
@@ -33,21 +35,21 @@
         <div class="queue-card">
           <div class="queue-header">
             <h3>{{ q.name }}</h3>
-            <span class="badge" [class]="q.status">{{ q.status }}</span>
+            <span class="badge" [class]="q.status">{{ 'QUEUE_STATUS.' + q.status.toUpperCase() | translate }}</span>
           </div>
           @if (q.description) {
             <p class="desc">{{ q.description }}</p>
           }
           <div class="queue-stats">
-            <span>⏳ {{ q.waiting_count }} em espera</span>
-            <span>⏱ ~{{ q.avg_service_time }} min</span>
+            <span>{{ 'QUEUE.WAITING_COUNT' | translate: { count: q.waiting_count } }}</span>
+            <span>{{ 'QUEUE.AVG_TIME' | translate: { minutes: q.avg_service_time } }}</span>
           </div>
           <button
             class="btn-join"
             [disabled]="q.status !== 'open' || hasActiveTicket(q.id) || joiningId === q.id"
             (click)="join(q.id)">
             @if (hasActiveTicket(q.id)) {
-              {{ 'QUEUE.ALREADY_IN' | translate }} — {{ getActiveTicket(q.id)?.ticket_number }}
+              {{ 'QUEUE.ALREADY_IN' | translate }} - {{ getActiveTicket(q.id)?.ticket_number }}
             } @else if (q.status !== 'open') {
               {{ 'QUEUE.QUEUE_CLOSED' | translate }}
             } @else {
@@ -63,4 +65,21 @@
     </div>
   }
 
+  @if (showQr && selectedTicket) {
+    <div class="overlay" (click)="closeQr()">
+      <div class="qr-modal" (click)="$event.stopPropagation()">
+        <div class="qr-modal-header">
+          <h3>{{ 'QUEUE.TICKET' | translate }} {{ selectedTicket.ticket_number }}</h3>
+          <button type="button" (click)="closeQr()">x</button>
+        </div>
+        <div class="qr-modal-body">
+          <p class="qr-queue">{{ selectedTicket.queue_name }}</p>
+          <app-ticket-qr
+            [ticketNumber]="selectedTicket.ticket_number"
+            [queueName]="selectedTicket.queue_name" />
+          <p class="qr-hint">{{ 'QUEUE.QR_HINT' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  }
 </div>

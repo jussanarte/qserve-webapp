@@ -36,6 +36,11 @@ export class LoginComponent {
     localStorage.setItem('qserve-lang', lang);
   }
 
+  setLangFromEvent(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.setLang(select.value);
+  }
+
   submit(): void {
     if (this.form.invalid) return;
     this.loading = true;

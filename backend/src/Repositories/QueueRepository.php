@@ -13,17 +13,33 @@ class QueueRepository {
 
     public function findAll(): array {
         $stmt = $this->db->query(
-            'SELECT q.*, u.name as created_by_name,
-                    (SELECT COUNT(*) FROM queue_tickets qt WHERE qt.queue_id = q.id AND qt.status = "waiting") as waiting_count
+            'SELECT q.*, u.name as created_by_name, COALESCE(w.waiting_count, 0) as waiting_count
              FROM queues q
              JOIN users u ON q.created_by = u.id
+             LEFT JOIN (
+                SELECT queue_id, COUNT(*) as waiting_count
+                FROM queue_tickets
+                WHERE status = "waiting"
+                GROUP BY queue_id
+             ) w ON w.queue_id = q.id
              ORDER BY q.created_at DESC'
         );
         return $stmt->fetchAll();
     }
 
     public function findById(int $id): ?array {
-        $stmt = $this->db->prepare('SELECT * FROM queues WHERE id = :id');
+        $stmt = $this->db->prepare(
+            'SELECT q.*, u.name as created_by_name, COALESCE(w.waiting_count, 0) as waiting_count
+             FROM queues q
+             JOIN users u ON q.created_by = u.id
+             LEFT JOIN (
+                SELECT queue_id, COUNT(*) as waiting_count
+                FROM queue_tickets
+                WHERE status = "waiting"
+                GROUP BY queue_id
+             ) w ON w.queue_id = q.id
+             WHERE q.id = :id'
+        );
         $stmt->execute(['id' => $id]);
         $result = $stmt->fetch();
         return $result ?: null;
@@ -48,10 +64,17 @@ class QueueRepository {
     public function update(int $id, array $data): bool {
         $stmt = $this->db->prepare(
             'UPDATE queues SET name = :name, description = :description,
-             max_capacity = :max_capacity, avg_service_time = :avg_service_time
+             status = :status, max_capacity = :max_capacity, avg_service_time = :avg_service_time
              WHERE id = :id'
         );
-        return $stmt->execute([...$data, 'id' => $id]);
+        return $stmt->execute([
+            'id' => $id,
+            'name' => $data['name'],
+            'description' => $data['description'] ?? null,
+            'status' => $data['status'] ?? 'closed',
+            'max_capacity' => $data['max_capacity'] ?? 50,
+            'avg_service_time' => $data['avg_service_time'] ?? 5,
+        ]);
     }
 
     public function updateStatus(int $id, string $status): bool {

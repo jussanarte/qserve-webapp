@@ -4,11 +4,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Subscription, interval, switchMap, startWith } from 'rxjs';
 import { QueueService } from '../../core/services/queue.service';
 import { Queue, Ticket } from '../../core/models/queue.model';
+import { TicketQrComponent } from '../../core/ticket-qr/ticket-qr.component';
 
 @Component({
   selector: 'app-queue',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, TicketQrComponent],
   templateUrl: './queue.component.html',
   styleUrls: ['./queue.component.scss']
 })
@@ -17,6 +18,8 @@ export class QueueComponent implements OnInit, OnDestroy {
   myTickets: Ticket[]      = [];
   loading                  = true;
   joiningId: number | null = null;
+  selectedTicket: Ticket | null = null;
+  showQr = false;
   private sub!: Subscription;
 
   constructor(private queueService: QueueService) {}
@@ -48,6 +51,16 @@ export class QueueComponent implements OnInit, OnDestroy {
 
   getActiveTicket(queueId: number): Ticket | undefined {
     return this.myTickets.find(t => t.queue_id === queueId && ['waiting','called'].includes(t.status));
+  }
+
+  openQr(ticket: Ticket): void {
+    this.selectedTicket = ticket;
+    this.showQr = true;
+  }
+
+  closeQr(): void {
+    this.showQr = false;
+    this.selectedTicket = null;
   }
 
   ngOnDestroy(): void { this.sub?.unsubscribe(); }

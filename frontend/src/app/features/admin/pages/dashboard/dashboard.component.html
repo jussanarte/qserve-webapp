@@ -1,0 +1,74 @@
+<div class="dashboard">
+  <h1 class="page-title">{{ 'NAV.DASHBOARD' | translate }}</h1>
+
+  @if (!stats) {
+    <div class="loading">{{ 'DASHBOARD.LOADING' | translate }}</div>
+  }
+
+  @if (stats) {
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">{{ stats.total_users }}</div>
+        <div class="stat-label">{{ 'DASHBOARD.USERS' | translate }}</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-value">{{ stats.active_queues }}</div>
+        <div class="stat-label">{{ 'DASHBOARD.ACTIVE_QUEUES' | translate }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">{{ stats.tickets_today }}</div>
+        <div class="stat-label">{{ 'DASHBOARD.TICKETS_TODAY' | translate }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">{{ stats.avg_service_time }}<span class="unit">min</span></div>
+        <div class="stat-label">{{ 'DASHBOARD.AVG_TIME' | translate }}</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">{{ 'DASHBOARD.TICKET_STATUS' | translate }}</h2>
+      <div class="status-row">
+        <div class="status-pill waiting">{{ stats.tickets_by_status.waiting }} {{ 'QUEUE.WAITING' | translate }}</div>
+        <div class="status-pill called">{{ stats.tickets_by_status.called }} {{ 'QUEUE.CALLED' | translate }}</div>
+        <div class="status-pill served">{{ stats.tickets_by_status.served }} {{ 'QUEUE.SERVED' | translate }}</div>
+        <div class="status-pill cancelled">{{ stats.tickets_by_status.cancelled }} {{ 'QUEUE.CANCELLED' | translate }}</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">{{ 'DASHBOARD.BY_HOUR' | translate }}</h2>
+      <svg class="hour-chart" viewBox="0 0 584 160" role="img">
+        @for (bar of chartBars; track bar.hour) {
+          <rect
+            class="bar"
+            [attr.x]="barX($index)"
+            [attr.y]="barY(bar.height)"
+            width="16"
+            [attr.height]="barHeight(bar.height)"
+            rx="3" />
+          @if ([0, 6, 12, 18, 23].includes($index)) {
+            <text [attr.x]="barX($index) + 8" y="152" text-anchor="middle">{{ bar.hour }}</text>
+          }
+        }
+      </svg>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">{{ 'DASHBOARD.QUEUE_SUMMARY' | translate }}</h2>
+      <div class="queue-table">
+        <div class="qt-header">
+          <span>{{ 'DASHBOARD.QUEUE' | translate }}</span>
+          <span>{{ 'ADMIN.WAITING' | translate }}</span>
+          <span>{{ 'DASHBOARD.SERVED_TODAY' | translate }}</span>
+        </div>
+        @for (q of stats.queue_summaries; track q.id) {
+          <div class="qt-row">
+            <span class="qt-name">{{ q.name }}</span>
+            <span class="qt-waiting">{{ q.waiting }}</span>
+            <span class="qt-served">{{ q.served_today }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

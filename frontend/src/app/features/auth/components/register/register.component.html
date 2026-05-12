@@ -1,16 +1,14 @@
 <div class="login-page">
   <div class="login-card">
-
     <div class="brand">
       <span class="brand-name">QSERVE</span>
       <span class="brand-sub">{{ 'AUTH.REGISTER_TITLE' | translate }}</span>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
-
       <div class="field">
         <label>{{ 'AUTH.NAME' | translate }}</label>
-        <input type="text" formControlName="name" placeholder="O seu nome" />
+        <input type="text" formControlName="name" />
         @if (form.get('name')?.invalid && form.get('name')?.touched) {
           <span class="err">{{ 'ERRORS.REQUIRED' | translate }}</span>
         }
@@ -18,7 +16,7 @@
 
       <div class="field">
         <label>{{ 'AUTH.EMAIL' | translate }}</label>
-        <input type="email" formControlName="email" placeholder="o.seu@email.ao" />
+        <input type="email" formControlName="email" />
         @if (form.get('email')?.invalid && form.get('email')?.touched) {
           <span class="err">{{ 'ERRORS.EMAIL_INVALID' | translate }}</span>
         }
@@ -26,7 +24,7 @@
 
       <div class="field">
         <label>{{ 'AUTH.PASSWORD' | translate }}</label>
-        <input type="password" formControlName="password" placeholder="••••••" />
+        <input type="password" formControlName="password" />
         @if (form.get('password')?.invalid && form.get('password')?.touched) {
           <span class="err">{{ 'ERRORS.REQUIRED' | translate }}</span>
         }
@@ -34,7 +32,7 @@
 
       <div class="field">
         <label>{{ 'AUTH.CONFIRM_PASSWORD' | translate }}</label>
-        <input type="password" formControlName="passwordConfirm" placeholder="••••••" />
+        <input type="password" formControlName="passwordConfirm" />
         @if (form.hasError('mismatch') && form.get('passwordConfirm')?.touched) {
           <span class="err">{{ 'ERRORS.PASSWORDS_MISMATCH' | translate }}</span>
         }
@@ -42,9 +40,17 @@
 
       <div class="field">
         <label>{{ 'COMMON.LANGUAGE' | translate }}</label>
-        <select formControlName="language" (change)="setLang($any($event.target).value)">
+        <select formControlName="language" (change)="setLangFromEvent($event)">
           <option value="pt">Português</option>
           <option value="en">English</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>{{ 'AUTH.ROLE' | translate }}</label>
+        <select formControlName="role">
+          <option value="student">{{ 'AUTH.ROLE_STUDENT' | translate }}</option>
+          <option value="admin">{{ 'AUTH.ROLE_ADMIN' | translate }}</option>
         </select>
       </div>
 
@@ -55,13 +61,11 @@
       <button type="submit" [disabled]="form.invalid || loading" class="btn-primary">
         {{ loading ? ('COMMON.LOADING' | translate) : ('AUTH.SUBMIT_REGISTER' | translate) }}
       </button>
-
     </form>
 
     <p class="link">
       {{ 'AUTH.HAS_ACCOUNT' | translate }}
       <a routerLink="/auth/login">{{ 'AUTH.LOGIN_LINK' | translate }}</a>
     </p>
-
   </div>
 </div>

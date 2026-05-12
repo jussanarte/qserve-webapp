@@ -91,6 +91,8 @@ class QueueService {
     }
 
     public function updateTicketStatus(int $ticketId, string $status): bool {
+        $allowed = ['waiting', 'called', 'served', 'cancelled'];
+        if (!in_array($status, $allowed, true)) throw new \RuntimeException('Status invalido');
         return $this->ticketRepo->updateStatus($ticketId, $status);
     }
 

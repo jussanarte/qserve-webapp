@@ -4,27 +4,27 @@
   <div class="nav-links">
     @if (user$ | async; as user) {
       @if (user.role === 'student' || user.role === 'admin') {
-        <a routerLink="/queue" routerLinkActive="active">Filas</a>
+        <a routerLink="/queue" routerLinkActive="active">{{ 'NAV.QUEUES' | translate }}</a>
       }
       @if (user.role === 'attendant' || user.role === 'admin') {
-        <a routerLink="/attendant" routerLinkActive="active">Atendimento</a>
+        <a routerLink="/attendant" routerLinkActive="active">{{ 'NAV.ATTENDANT' | translate }}</a>
       }
       @if (user.role === 'admin') {
-        <a routerLink="/admin" routerLinkActive="active">Admin</a>
+        <a routerLink="/admin" routerLinkActive="active">{{ 'NAV.ADMIN' | translate }}</a>
       }
     }
   </div>
 
   <div class="actions">
-    <button class="btn-icon" (click)="setLang('pt')" title="Português">PT</button>
-    <button class="btn-icon" (click)="setLang('en')" title="English">EN</button>
+    <button class="btn-icon" type="button" (click)="setLang('pt')" title="Portugues">PT</button>
+    <button class="btn-icon" type="button" (click)="setLang('en')" title="English">EN</button>
 
-    <button class="btn-icon" (click)="toggleTheme()" [title]="'COMMON.TOGGLE_THEME' | translate">
-      @if ((theme$ | async) === 'dark') { ☀️ } @else { 🌙 }
+    <button class="btn-icon" type="button" (click)="toggleTheme()" [title]="'COMMON.TOGGLE_THEME' | translate">
+      @if ((theme$ | async) === 'dark') { L } @else { D }
     </button>
 
     @if (user$ | async) {
-      <button class="btn-logout" (click)="logout()">
+      <button class="btn-logout" type="button" (click)="logout()">
         {{ 'COMMON.LOGOUT' | translate }}
       </button>
     }

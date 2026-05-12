@@ -1,0 +1,30 @@
+<div class="reports">
+  <h1 class="page-title">{{ 'REPORTS.TITLE' | translate }}</h1>
+
+  <div class="report-card">
+    <h2>{{ 'REPORTS.TICKETS_TITLE' | translate }}</h2>
+    <p class="desc">{{ 'REPORTS.DESC' | translate }}</p>
+
+    <form [formGroup]="form">
+      <div class="field-row">
+        <div class="field">
+          <label>{{ 'REPORTS.DATE_FROM' | translate }}</label>
+          <input type="date" formControlName="date_from" />
+        </div>
+        <div class="field">
+          <label>{{ 'REPORTS.DATE_TO' | translate }}</label>
+          <input type="date" formControlName="date_to" />
+        </div>
+      </div>
+    </form>
+
+    <div class="export-buttons">
+      <button class="btn-csv" type="button" (click)="export('csv')" [disabled]="form.invalid || loading">
+        {{ loading ? ('REPORTS.EXPORTING' | translate) : ('REPORTS.EXPORT_CSV' | translate) }}
+      </button>
+      <button class="btn-pdf" type="button" (click)="export('pdf')" [disabled]="form.invalid || loading">
+        {{ loading ? ('REPORTS.EXPORTING' | translate) : ('REPORTS.EXPORT_PDF' | translate) }}
+      </button>
+    </div>
+  </div>
+</div>
